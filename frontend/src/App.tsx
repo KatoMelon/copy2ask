@@ -18,6 +18,7 @@ import {
 } from '@icon-park/react'
 import { Toggle } from './components/ui/toggle'
 import {
+  BrowserOpenURL,
   ClipboardGetText,
   ClipboardSetText,
   Quit,
@@ -319,7 +320,7 @@ const App = () => {
               </AlertDialogHeader>
               <AlertDialogFooter>
                 <AlertDialogCancel>好的</AlertDialogCancel>
-                <AlertDialogAction>
+                <AlertDialogAction onClick={() => BrowserOpenURL('https://github.com/KatoMelon/copy2ask')}>
                   <GithubOne size={16} className='mr-2' />
                   带我去 GitHub
                 </AlertDialogAction>
