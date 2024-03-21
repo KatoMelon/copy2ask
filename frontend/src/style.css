@@ -1,0 +1,25 @@
+html {
+  width: 100vw;
+  height: 100vh;
+  user-select: none;
+  overflow: hidden;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+}
+
+.draggable {
+  --wails-draggable: drag;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+}
+
+#App {
+  width: 100vw;
+  height: 100vh;
+}
