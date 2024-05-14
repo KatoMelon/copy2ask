@@ -1,6 +1,8 @@
 module changeme
 
-go 1.18
+go 1.21
+
+toolchain go1.22.3
 
 // replace github.com/wailsapp/wails/v2 v2.7.1 => C:\Users\86180\go\pkg\mod
 
