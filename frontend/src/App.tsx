@@ -66,8 +66,12 @@ const App = () => {
   // API Key & Base URL
   const initApiKey = localStorage.getItem('copy2ask:apikey') ? localStorage.getItem('copy2ask:apikey')! : ''
   const initBaseUrl = localStorage.getItem('copy2ask:baseurl') ? localStorage.getItem('copy2ask:baseurl')! : ''
+  const initModelName = localStorage.getItem('copy2ask:modelname')
+    ? localStorage.getItem('copy2ask:modelname')!
+    : 'gpt-3.5-turbo'
   const [apiKey, setApiKey] = useState(initApiKey)
   const [baseUrl, setBaseUrl] = useState(initBaseUrl)
+  const [modelName, setModelName] = useState(initModelName)
   // 是否为加载状态
   const [isChatLoading, setIsChatLoading] = useState(false)
   // 模板锁定相关
@@ -87,6 +91,10 @@ const App = () => {
     localStorage.setItem('copy2ask:baseurl', baseurl)
     setBaseUrl(baseurl)
   }
+  const changeModelName = (modelname: string) => {
+    localStorage.setItem('copy2ask:modelname', modelname)
+    setModelName(modelname)
+  }
 
   const changeIsPinned = () => {
     WindowSetAlwaysOnTop(!isPinned)
@@ -103,7 +111,7 @@ const App = () => {
       openai.chat.completions
         .create({
           messages: [{ role: 'user', content: prompts }],
-          model: 'gpt-3.5-turbo',
+          model: modelName,
         })
         .then((chatCompletion) => {
           resolve(chatCompletion.choices[0].message.content)
@@ -278,21 +286,21 @@ const App = () => {
               </DialogHeader>
               <div className='grid gap-4 py-4'>
                 <div className='grid grid-cols-4 items-center gap-4'>
-                  <Label htmlFor='name' className='text-right'>
-                    BaseURL
-                  </Label>
+                  <Label className='text-right'>BaseURL</Label>
                   <Input value={baseUrl} onChange={(e) => changeBaseUrlKey(e.target.value)} className='col-span-3' />
                 </div>
                 <div className='grid grid-cols-4 items-center gap-4'>
-                  <Label htmlFor='username' className='text-right'>
-                    Api Key
-                  </Label>
+                  <Label className='text-right'>Api Key</Label>
                   <Input
                     value={apiKey}
                     type='password'
                     onChange={(e) => changeApiKey(e.target.value)}
                     className='col-span-3'
                   />
+                </div>
+                <div className='grid grid-cols-4 items-center gap-4'>
+                  <Label className='text-right'>Model Name</Label>
+                  <Input value={modelName} onChange={(e) => changeModelName(e.target.value)} className='col-span-3' />
                 </div>
               </div>
             </DialogContent>
